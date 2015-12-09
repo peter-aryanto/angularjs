@@ -1,18 +1,35 @@
+<style>
+  .ng-dirty.ng-invalid { background-color: lightpink; }
+  .ng-valid { background-color: lightgreen; }
+  /*span.error { color: red; font-weight: bold; }*/
+</style>
+
 <h2>Check Out Now</h2>
 <p>Please enter your details, and we'll ship your goods right away!</p>
 
+<form name='shippingForm' novalidate role='form'>
 <div class='well'>
   <h3>Ship to</h3>
   <div class='form-group'>
-    <label>Name</label><input class='form-control' ng-model='data.shipping.name' />
+    <label for='shippingName'>Name</label>
+    <input class='form-control' id='shippingName' name='shippingName' ng-model='data.shipping.name' placeholder='Please enter a name' required />
+    <!--<span class='error' ng-show='shippingForm.shippingName.$error.required'>Please enter a name</span>-->
   </div>
 
   <h3>Address</h3>
   <div class='form-group'>
-    <label>Street Address</label><input class='form-control' ng-model='data.shipping.street' />
+    <label for='shippingStreet'>Street Address</label>
+    <input class='form-control' id='shippingStreet' name='shippingStreet' ng-model='data.shipping.street' placeholder='Please enter a street address' required />
+    <!--<span class='error' ng-show='shippingForm.shippingStreet.$error.required'>Please enter a street address</span>-->
+  </div>
+  
+  <h3>Options</h3>
+  <div class='checkbox'>
+    <label><input name='shippingGiftWrap' ng-model='data.shipping.giftWrap' type='checkbox'/>Gift Wrap</label>
   </div>
 
   <div class='text-center'>
-    <button class='btn btn-primary'>Complete Order</button>
+    <button class='btn btn-primary' ng-disabled='shippingForm.$invalid'>Complete Order</button>
   </div>
 </div>
+</form>
