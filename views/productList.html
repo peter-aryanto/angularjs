@@ -1,0 +1,28 @@
+﻿<div class="panel panel-default row" ng-controller="productListCtrl" ng-hide='data.error'>
+  <div class="col-xs-3">
+    <a ng-click="selectCategory()" class="btn btn-block btn-default btn-lg" ng-class="getCategoryClass()">Home</a>
+    <a ng-click="selectCategory(category)"
+       ng-repeat="category in data.products | unique: 'category' | orderBy: any_word_wo_quotes_here_because_it_is_just_1_dimensional_array: true"
+       class="btn btn-block btn-default btn-lg"
+       ng-class="getCategoryClass(category)">{{category}}</a>
+  </div>
+
+  <div class='col-xs-8'>
+    <div class='well' ng-repeat='product in data.products | filter : filterByCategory | selectedPage : selectedPage : maxProductsPerPage'>
+      <h3>
+        <strong>{{product.name}}</strong>
+        <span class='pull-right label label-primary'>{{product.price | currency}}</span>
+      </h3>
+      <span class='lead'>{{product.description}}</span>
+      <button class='btn btn-success pull-right' ng-click='addProductToCart(product)'>Add to Cart</button>
+    </div>
+    <div class='btn-group'>
+      <a class='btn btn-default'
+         ng-class='getPageClass(page)'
+         ng-click='selectPage(page)'
+         ng-repeat='page in data.products | filter : filterByCategory | pages : maxProductsPerPage'>
+        {{page}}
+      </a>
+    </div>
+  </div>
+</div>
